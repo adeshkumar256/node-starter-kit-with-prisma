@@ -25,15 +25,15 @@ const getUserById = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
-    const { name, email } = req.body;
+    const { name, email } = req.body.user;
     const newUser = await prisma.user.create({
       data: { name, email }
     });
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(error)
   }
 };
 
