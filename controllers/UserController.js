@@ -27,9 +27,9 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res, next) => {
   try {
-    const { name, email } = req.body.user;
+    const { firstName, lastName, email } = req.body.user;
     const newUser = await prisma.user.create({
-      data: { name, email }
+      data: { firstName, lastName, email }
     });
     res.status(201).json(newUser);
   } catch (error) {
@@ -40,10 +40,10 @@ const createUser = async (req, res, next) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { firstName, lastName, email } = req.body;
     const updatedUser = await prisma.user.update({
       where: { id: parseInt(id) },
-      data: { name, email }
+      data: { firstName, lastName, email }
     });
     res.json(updatedUser);
   } catch (error) {
